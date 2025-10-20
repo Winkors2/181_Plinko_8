@@ -1,69 +1,47 @@
-# Инструкции для разработчиков
+# FollowTheBall
 
-## Структура репозиториев
+A small but polished iOS game built with SwiftUI + SpriteKit.
+Catch the ball, grow your score, and clear levels with increasing goals.
 
-Каждый репозиторий должен содержать следующую структуру:
+## Features
+- Multiple levels, each with its own target score
+- Fast, responsive SpriteKit gameplay (tap to catch the ball)
+- 1-second freeze and satisfying spark effect on every catch
+- Win popup with Next/Home actions
+- Level selection screen with progress and best scores
+- Statistics, Achievements, and Rewards sections
+- Consistent color palette and full-screen gradient background
 
-```
-Репозиторий/
-├── Screenshots/
-│   ├── 1/          # Самые лайтовые скриншоты
-│   ├── 2/          # Средние скриншоты
-│   ├── 3/          # Более агрессивные скриншоты
-│   ├── 4/          # Самые агрессивные скриншоты
-│   └── 5/          # Дополнительные скриншоты (если нужно)
-├── description.txt # Описание приложения
-└── name.txt        # Название приложения
-```
+## How to Play
+- Tap the moving ball to catch it.
+- Each catch pauses the ball for a second and adds +1 point.
+- Reach the level target to win.
 
-## Заполнение файлов
+## Tech Stack
+- SwiftUI for screens and navigation
+- SpriteKit for the game scene and animations
+- UserDefaults for lightweight persistence
 
-### name.txt
-- **Формат**: Простое название из 3-4 слов
-- **Стиль**: Без технических терминов, понятное обычному пользователю
-- **Примеры**:
-  - "Circle Ball Drop"
-  - "Lucky Wheel Spin"
-  - "Color Match Puzzle"
-  - "Bubble Pop Adventure"
-  - "Magic Card Flip"
+## Project Structure
+- `MainMenuView.swift` — entry UI with primary actions
+- `LevelSelectionView.swift` — pick a level, view progress
+- `GameView.swift` — hosts the SpriteKit scene and HUD
+- `GameScene.swift` — ball logic, movement, catch effects
+- `LevelManager.swift` — level data (targets, speed, size)
+- `AchievementsView.swift`, `RewardsView.swift`, `StatisticsView.swift`
 
-### description.txt
-- **Стиль**: Литературное описание без технических терминов
-- **Содержание**: Что делает приложение, как играть, основные особенности
-- **Тон**: Дружелюбный, понятный, увлекательный
-- **Пример**:
-  ```
-  Увлекательная игра, где нужно ловить падающие шарики в правильном порядке. 
-  Чем больше шариков поймаешь, тем больше очков получишь! 
-  Игра становится сложнее с каждым уровнем, но это делает её ещё интереснее. 
-  Идеально подходит для быстрых игровых сессий и развития реакции.
-  ```
+## Build & Run
+1. Open `FollowTheBall.xcodeproj` in Xcode 15 or newer.
+2. Select an iOS Simulator (e.g., iPhone 15) and press Run.
 
-##
-## Рекомендации
+If the Simulator misbehaves:
+- Quit Simulator and Xcode, then re-open.
+- Clear DerivedData (Xcode → Settings → Locations → DerivedData).
+- From Terminal: `xcrun simctl shutdown all && xcrun simctl erase all`.
 
-1. **Названия**: Избегайте технических терминов типа "UI", "UX", "API"
-2. **Описания**: Пишите как для обычных пользователей, не для разработчиков
-3. **Скриншоты**: Сортируйте по интенсивности и сложности
-4. **Качество**: Используйте только качественные, четкие скриншоты
-5. **Количество**: В каждой папке должно быть достаточно скриншотов для демонстрации
+## Customization Tips
+- Colors live inline in views; adjust gradient stops to your taste.
+- Level parameters (target score, speed, size) are defined in `LevelManager`.
 
-## Примеры хороших названий
-
-- "Rainbow Ball Catch"
-- "Lucky Dice Roll"
-- "Magic Card Match"
-- "Bubble Burst Fun"
-- "Star Coin Collector"
-- "Color Wheel Spin"
-- "Puzzle Block Drop"
-- "Crystal Gem Hunt"
-
-## Примеры плохих названий
-
-- "Mobile Game App" ❌
-- "Casino Slot Machine" ❌
-- "Gambling Platform" ❌
-- "Betting Application" ❌
-- "Game Engine Demo" ❌
+## License
+This project is provided for learning and demo purposes.

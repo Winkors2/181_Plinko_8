@@ -1,0 +1,13 @@
+FollowTheBall is a quick, feel‑good game about focus and reaction.
+
+A small black ball darts across the screen. Your task is simple: tap it to catch it. Each clean catch freezes the ball for a heartbeat and adds one more point to your score. Reach the target, and the level is yours.
+
+The first levels are calm and inviting. As you progress, the pace rises, the motion grows livelier, and every successful tap feels like a tiny victory. Short rounds make it perfect for a spare minute, yet the gentle challenge keeps pulling you back for “just one more try”.
+
+What you’ll enjoy:
+- Clear, relaxing visuals with a smooth gradient backdrop
+- Satisfying moment of stillness after every catch
+- A sense of progress: levels unlock, goals increase, best scores improve
+- Lighthearted screens for statistics, achievements, and rewards
+
+FollowTheBall is a pocket‑sized focus exercise: warm, friendly, and endlessly replayable.
