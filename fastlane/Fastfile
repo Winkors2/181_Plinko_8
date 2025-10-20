@@ -1,0 +1,246 @@
+default_platform(:ios)
+default_platform(:ios)
+
+DEVELOPER_APP_ID = ENV["DEVELOPER_APP_ID"]
+DEVELOPER_APP_IDENTIFIER = ENV["DEVELOPER_APP_IDENTIFIER"]
+PROVISIONING_PROFILE_SPECIFIER = ENV["PROVISIONING_PROFILE_SPECIFIER"]
+TEMP_KEYCHAIN_USER = ENV["TEMP_KEYCHAIN_USER"]
+TEMP_KEYCHAIN_PASSWORD = ENV["TEMP_KEYCHAIN_PASSWORD"]
+APPLE_ISSUER_ID = ENV["APPLE_ISSUER_ID"]
+APPLE_KEY_ID = ENV["APPLE_KEY_ID"]
+APPLE_KEY_CONTENT = ENV["APPLE_KEY_CONTENT"]
+GIT_AUTHORIZATION = ENV["GIT_AUTHORIZATION"]
+XCODEPROJ_PROJECTNAME_W_EXTENSION = ENV["XCODEPROJ_PROJECTNAME_W_EXTENSION"]
+XCODEPROJ_WORKSPACE_W_EXTENSION = ENV["XCODEPROJ_WORKSPACE_W_EXTENSION"]
+XCODEPROJ_SCHEMENAME = ENV["XCODEPROJ_SCHEMENAME"]
+LOCALIZATION_KEY = ENV["LOCALIZATION_KEY"]
+DESCRIPITON_BEZ_KAVICHEK = ENV["DESCRIPITON_BEZ_KAVICHEK"]
+KEYWORDS_CHEREZ_ZAPYATUU = ENV["KEYWORDS_CHEREZ_ZAPYATUU"]
+SUPPORT_URL = ENV["SUPPORT_URL"]
+PRIVACY_URL = ENV["PRIVACY_URL"]
+PRIMARY_CATEGORY = ENV["PRIMARY_CATEGORY"]
+REVIEW_FIRST_NAME = ENV["REVIEW_FIRST_NAME"]
+REVIEW_LAST_NAME = ENV["REVIEW_LAST_NAME"]
+REVIEW_PHONE_NUMBER = ENV["REVIEW_PHONE_NUMBER"]
+REVIEW_EMAIL = ENV["REVIEW_EMAIL"]
+TEAM_ID = ENV["TEAM_ID"]
+
+def delete_temp_keychain(name)
+  delete_keychain(
+    name: name
+  ) if File.exist? File.expand_path("~/Library/Keychains/#{name}-db")
+end
+
+def create_temp_keychain(name, password)
+  create_keychain(
+    name: name,
+    password: password,
+    unlock: false,
+    timeout: 0
+  )
+end
+
+def ensure_temp_keychain(name, password)
+  delete_temp_keychain(name)
+  create_temp_keychain(name, password)
+end
+
+platform :ios do
+  # Лейн для сборки и загрузки билда в TestFlight
+  lane :build_and_upload do
+    keychain_name = TEMP_KEYCHAIN_USER
+    keychain_password = TEMP_KEYCHAIN_PASSWORD
+    ensure_temp_keychain(keychain_name, keychain_password)
+
+    api_key = app_store_connect_api_key(
+      key_id: APPLE_KEY_ID,
+      issuer_id: APPLE_ISSUER_ID,
+      key_content: APPLE_KEY_CONTENT,            
+      is_key_content_base64: false,            
+      in_house: false
+    )
+
+    current_version = get_version_number(xcodeproj: XCODEPROJ_PROJECTNAME_W_EXTENSION)
+
+    latest_build_number = latest_testflight_build_number(
+      api_key: api_key,
+      version: current_version,
+      app_identifier: DEVELOPER_APP_IDENTIFIER
+    )
+
+    increment_build_number(
+      build_number: (latest_build_number + 1),
+    )
+    
+    match(
+      type: 'appstore',
+      app_identifier: "#{DEVELOPER_APP_IDENTIFIER}",
+      git_basic_authorization: Base64.strict_encode64(GIT_AUTHORIZATION),
+      readonly: false,
+      keychain_name: keychain_name,
+      keychain_password: keychain_password,
+      api_key: api_key
+    )
+
+    update_code_signing_settings(
+        use_automatic_signing: false,
+        team_id: TEAM_ID,
+        profile_name: PROVISIONING_PROFILE_SPECIFIER,
+        code_sign_identity: "Apple Distribution",
+        path: XCODEPROJ_PROJECTNAME_W_EXTENSION
+    )
+
+    gym(
+      workspace: XCODEPROJ_WORKSPACE_W_EXTENSION,
+      scheme: XCODEPROJ_SCHEMENAME,
+      configuration: "Release",
+      destination: "generic/platform=iOS",
+      export_options: {
+        method: "app-store",
+        signingStyle: "manual",
+        provisioningProfiles: { DEVELOPER_APP_IDENTIFIER => PROVISIONING_PROFILE_SPECIFIER }
+      },
+      output_name: "#{XCODEPROJ_SCHEMENAME}"
+    )
+
+    pilot(
+      apple_id: "#{DEVELOPER_APP_ID}",
+      app_identifier: "#{DEVELOPER_APP_IDENTIFIER}",
+      skip_waiting_for_build_processing: true,
+      skip_submission: true,
+      distribute_external: false,
+      notify_external_testers: false,
+      ipa: "./#{XCODEPROJ_SCHEMENAME}.ipa"
+    )
+
+    delete_temp_keychain(keychain_name)
+  end
+
+  # Лейн для загрузки метаданных без precheck
+  lane :upload_metadata do
+    api_key = app_store_connect_api_key(
+      key_id: APPLE_KEY_ID,
+      issuer_id: APPLE_ISSUER_ID,
+      key_content: APPLE_KEY_CONTENT,            
+      is_key_content_base64: false,            
+      in_house: false
+    )
+
+    # Получаем текущую версию из проекта
+    current_version = get_version_number(xcodeproj: XCODEPROJ_PROJECTNAME_W_EXTENSION)
+    UI.message("Используем версию: #{current_version}")
+
+    UI.message("Загружаем метаданные в App Store Connect...")
+
+    deliver(
+      api_key: api_key,
+      app_identifier: DEVELOPER_APP_IDENTIFIER,
+      app_version: current_version,
+      metadata_path: "./fastlane/metadata",
+      app_rating_config_path: "./fastlane/rating_config.json",
+      skip_binary_upload: true,
+      skip_screenshots: true,
+      submit_for_review: false,
+      force: true,
+      run_precheck_before_submit: false,
+      app_review_information: nil
+    )
+
+    UI.message("Метаданные успешно загружены!")
+  end
+
+  # Лейн для загрузки скриншотов
+  lane :upload_screenshots do
+    api_key = app_store_connect_api_key(
+      key_id: APPLE_KEY_ID,
+      issuer_id: APPLE_ISSUER_ID,
+      key_content: APPLE_KEY_CONTENT,
+      is_key_content_base64: false
+    )
+
+    ENV["FASTLANE_ENABLE_BETA_DELIVER_SYNC_SCREENSHOTS"] = "1"
+
+    deliver(
+      app_identifier: DEVELOPER_APP_IDENTIFIER,
+      screenshots_path: "./fastlane/screenshots",
+      skip_binary_upload: true,
+      skip_metadata: true,
+      skip_app_version_update: true,
+      overwrite_screenshots: true,
+      force: true,
+      run_precheck_before_submit: false
+    )
+  end
+
+  # Оригинальный лейн (оставляем для совместимости)
+  lane :closed_beta do
+    keychain_name = TEMP_KEYCHAIN_USER
+    keychain_password = TEMP_KEYCHAIN_PASSWORD
+    ensure_temp_keychain(keychain_name, keychain_password)
+
+    api_key = app_store_connect_api_key(
+      key_id: APPLE_KEY_ID,
+      issuer_id: APPLE_ISSUER_ID,
+      key_content: APPLE_KEY_CONTENT,            
+      is_key_content_base64: false,            
+      in_house: false
+    )
+
+    current_version = get_version_number(xcodeproj: XCODEPROJ_PROJECTNAME_W_EXTENSION)
+
+    latest_build_number = latest_testflight_build_number(
+      api_key: api_key,
+      version: current_version,
+      app_identifier: DEVELOPER_APP_IDENTIFIER
+    )
+
+    increment_build_number(
+      build_number: (latest_build_number + 1),
+    )
+    
+    match(
+      type: 'appstore',
+      app_identifier: "#{DEVELOPER_APP_IDENTIFIER}",
+      git_basic_authorization: Base64.strict_encode64(GIT_AUTHORIZATION),
+      readonly: false,
+      keychain_name: keychain_name,
+      keychain_password: keychain_password,
+      api_key: api_key
+    )
+
+    update_code_signing_settings(
+        use_automatic_signing: false,
+        team_id: TEAM_ID,
+        profile_name: PROVISIONING_PROFILE_SPECIFIER,
+        code_sign_identity: "Apple Distribution",
+        path: XCODEPROJ_PROJECTNAME_W_EXTENSION
+    )
+
+    gym(
+        scheme: XCODEPROJ_SCHEMENAME,
+        output_name: "#{XCODEPROJ_SCHEMENAME}",
+        configuration: "Release",
+        export_options: {
+            method: "app-store",
+            provisioningProfiles: {
+                DEVELOPER_APP_IDENTIFIER => PROVISIONING_PROFILE_SPECIFIER
+            }
+        },
+          xcargs: "CODE_SIGN_STYLE='Manual' DEVELOPMENT_TEAM='#{TEAM_ID}' PROVISIONING_PROFILE_SPECIFIER='#{PROVISIONING_PROFILE_SPECIFIER}' CODE_SIGN_IDENTITY='Apple Distribution'"
+    )
+
+    pilot(
+      apple_id: "#{DEVELOPER_APP_ID}",
+      app_identifier: "#{DEVELOPER_APP_IDENTIFIER}",
+      skip_waiting_for_build_processing: true,
+      skip_submission: true,
+      distribute_external: false,
+      notify_external_testers: false,
+      ipa: "./#{XCODEPROJ_SCHEMENAME}.ipa"
+    )
+
+
+    delete_temp_keychain(keychain_name)
+  end
+end
+

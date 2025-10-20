@@ -1,0 +1,7 @@
+git_url("https://github.com/Winkors/181_Plinko_8")
+
+storage_mode("git")
+
+type("appstore")
+
+app_identifier("com.enn.keskula.app")

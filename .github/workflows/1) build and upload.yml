@@ -1,0 +1,80 @@
+name: 1) Build and Upload to TestFlight
+
+# Запуск: вручную через GitHub Actions или по расписанию
+on:
+  workflow_dispatch:  # Ручной запуск
+  # schedule:  # Автоматический запуск по расписанию
+  #   - cron: '0 9 * * 1'  # Каждый понедельник в 9:00 UTC
+
+jobs:
+  build_and_upload:
+    name: Build and Upload to TestFlight
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup environment variables
+        uses: ./.github/actions/setup-env
+
+      - name: Install CocoaPods (if needed) and install Pods
+        run: |
+          if [ -f Gemfile ]; then
+            echo "Using Bundler to install gems..."
+            gem install bundler -N || true
+            bundle install --path vendor/bundle
+            bundle exec pod --version
+            bundle exec pod repo update
+            bundle exec pod install --clean-install
+          else
+            echo "Installing CocoaPods gem..."
+            sudo gem install cocoapods -N || true
+            pod --version
+            pod repo update
+            pod install --clean-install
+          fi
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ env.XCODE_VERSION }}
+          
+      - name: Xcode first launch (license & platforms)
+        run: |
+          sudo xcodebuild -license accept
+          sudo xcodebuild -runFirstLaunch
+          sudo xcodebuild -downloadPlatform iOS || true
+          xcode-select -p
+          xcodebuild -showsdks
+
+      - name: Show Xcode & SDKs
+        run: |
+          xcodebuild -version
+          xcodebuild -showsdks
+
+      - name: Build and Upload to TestFlight
+        uses: maierj/fastlane-action@v1.4.0
+        with:
+          lane: build_and_upload
+        env:
+          DEVELOPER_APP_ID: ${{ env.DEVELOPER_APP_ID }}
+          DEVELOPER_APP_IDENTIFIER: ${{ env.DEVELOPER_APP_IDENTIFIER }}
+          PROVISIONING_PROFILE_SPECIFIER: ${{ env.PROVISIONING_PROFILE_SPECIFIER }}
+          TEAM_ID: ${{ env.TEAM_ID }}
+          GIT_AUTHORIZATION: ${{ env.GIT_AUTHORIZATION }}
+          XCODEPROJ_PROJECTNAME_W_EXTENSION: ${{ env.XCODEPROJ_PROJECTNAME_W_EXTENSION }}
+          XCODEPROJ_WORKSPACE_W_EXTENSION: ${{ env.XCODEPROJ_WORKSPACE_W_EXTENSION }}
+          XCODEPROJ_SCHEMENAME: ${{ env.XCODEPROJ_SCHEMENAME }}
+          TEMP_KEYCHAIN_USER: ${{ env.TEMP_KEYCHAIN_USER }}
+          APPLE_KEY_ID: ${{ env.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ env.APPLE_ISSUER_ID }}
+          APPLE_KEY_CONTENT: |
+            -----BEGIN PRIVATE KEY-----
+            MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgd/bhdb9o8tJpsLBm
+            aJJ8ivGsO4wh6/HiKH0DTHFjkpCgCgYIKoZIzj0DAQehRANCAAS40UZ6UfvNPOpG
+            lVq1r3b6AbcFFQDX8EcmdhHOTjoWAqC4duGeo9smf87GKtC6LyRzI35KEn4IigdE
+            UTUu0Hjr
+            -----END PRIVATE KEY-----
+          MATCH_PASSWORD: ${{ env.MATCH_PASSWORD }}
+          TEMP_KEYCHAIN_PASSWORD: ${{ env.TEMP_KEYCHAIN_PASSWORD }}

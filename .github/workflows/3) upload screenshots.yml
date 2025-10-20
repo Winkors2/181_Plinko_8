@@ -1,0 +1,36 @@
+name: 3) Upload Screenshots
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upload_screenshots:
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup environment variables
+        uses: ./.github/actions/setup-env
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ env.XCODE_VERSION }}
+
+      - name: Upload screenshots to App Store
+        uses: maierj/fastlane-action@v1.4.0
+        with:
+          lane: upload_screenshots
+        env:
+          APPLE_KEY_ID: ${{ env.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ env.APPLE_ISSUER_ID }}
+          APPLE_KEY_CONTENT: |
+            -----BEGIN PRIVATE KEY-----
+            MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgd/bhdb9o8tJpsLBm
+            aJJ8ivGsO4wh6/HiKH0DTHFjkpCgCgYIKoZIzj0DAQehRANCAAS40UZ6UfvNPOpG
+            lVq1r3b6AbcFFQDX8EcmdhHOTjoWAqC4duGeo9smf87GKtC6LyRzI35KEn4IigdE
+            UTUu0Hjr
+            -----END PRIVATE KEY-----
+          DEVELOPER_APP_IDENTIFIER: ${{ env.DEVELOPER_APP_IDENTIFIER }}

@@ -1,0 +1,34 @@
+name: 'Setup Environment Variables'
+description: 'Устанавливает общие переменные окружения для всех workflow'
+
+# Использование: 
+# - name: Setup environment variables
+#   uses: ./.github/actions/setup-env
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set environment variables
+      shell: bash
+      run: |
+        # Apple Developer настройки
+        echo "DEVELOPER_APP_ID=6754204855" >> $GITHUB_ENV
+        echo "DEVELOPER_APP_IDENTIFIER=com.enn.keskula.app" >> $GITHUB_ENV
+        echo "TEAM_ID=3APTC9GFJP" >> $GITHUB_ENV
+        echo "XCODE_VERSION=16.2" >> $GITHUB_ENV
+        echo "XCODEPROJ_PROJECTNAME_W_EXTENSION=FollowTheBall.xcodeproj" >> $GITHUB_ENV
+        echo "XCODEPROJ_WORKSPACE_W_EXTENSION=FollowTheBall.xcworkspace" >> $GITHUB_ENV
+        echo "XCODEPROJ_SCHEMENAME=FollowTheBall" >> $GITHUB_ENV
+        echo "APPLE_KEY_ID=JA69BXYRJB" >> $GITHUB_ENV
+        echo "APPLE_ISSUER_ID=497e0743-0764-40cf-a201-513fd4a078e3" >> $GITHUB_ENV
+        # APPLE_KEY_CONTENT не задается здесь; указывайте прямо в workflows
+        echo "PROVISIONING_PROFILE_SPECIFIER=match AppStore com.enn.keskula.app" >> $GITHUB_ENV
+        echo "MATCH_PASSWORD=tempMatchPassword" >> $GITHUB_ENV
+        echo "TEMP_KEYCHAIN_USER=tempKeychainUser" >> $GITHUB_ENV
+        echo "TEMP_KEYCHAIN_PASSWORD=tempKeychainPassword" >> $GITHUB_ENV
+        echo "GIT_AUTHORIZATION=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" >> $GITHUB_ENV
+        
+        # Match настройки
+        echo "MATCH_GIT_URL=https://github.com/Winkors/181_Plinko_8" >> $GITHUB_ENV
+        echo "MATCH_STORAGE_MODE=git" >> $GITHUB_ENV
+        echo "MATCH_TYPE=appstore" >> $GITHUB_ENV
