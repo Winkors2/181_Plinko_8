@@ -7,8 +7,8 @@ workflows:
         vars:
           XCODE_WORKSPACE: "FollowTheBall.xcworkspace"
           XCODE_SCHEME: "FollowTheBall"
-          BUNDLE_ID: ""
-          APP_STORE_APP_ID: 
+          BUNDLE_ID: "com.enn.keskula.app"
+          APP_STORE_APP_ID: 6754204855
         xcode: latest
         cocoapods: 1.14.2
       scripts:
