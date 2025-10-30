@@ -1,0 +1,12 @@
+FollowTheBall je rychlá, příjemná hra o soustředění a reakci.
+
+Malý černý míček sviští po obrazovce. Tvůj úkol je jednoduchý: klepnutím ho chyť. Každé přesné klepnutí míček na chvilku zastaví a přidá bod do skóre. Dosáhni cíle a úroveň je tvoje.
+
+První úrovně jsou klidné a vstřícné. Jak postupuješ, tempo roste, pohyb ožívá a každý úspěšný dotyk je jako malé vítězství. Krátké partie se hodí na minutku volna a jemná výzva láká na „ještě jeden pokus“.
+
+Co si užiješ:
+- Čistou, uklidňující grafiku s plynulým gradientním pozadím
+- Uspokojivý okamžik klidu po každém chycení
+- Pocit postupu: odemykání úrovní, rostoucí cíle, zlepšující se rekordy
+- Lehká zobrazení statistik, úspěchů a odměn
+

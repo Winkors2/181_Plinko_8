@@ -1,0 +1,12 @@
+FollowTheBall adalah gim ringan dan cepat tentang fokus dan reaksi.
+
+Sebuah bola hitam kecil melesat di layar. Tugasmu sederhana: ketuk untuk menangkapnya. Setiap ketukan tepat membuat bola berhenti sekejap dan menambah satu poin ke skor. Capai target dan level jadi milikmu.
+
+Level awal tenang dan ramah. Seiring progres, tempo naik, gerak makin hidup, dan setiap ketukan sukses terasa seperti kemenangan kecil. Ronde singkat cocok untuk waktu luang sebentar, sementara tantangan yang lembut bikin ingin “sekali lagi”.
+
+Yang akan kamu suka:
+- Visual jernih dan menenangkan dengan latar gradien halus
+- Momen hening yang memuaskan setelah setiap tangkapan
+- Rasa progres: level terbuka, target meningkat, rekor membaik
+- Layar ringan untuk statistik, pencapaian, dan hadiah
+

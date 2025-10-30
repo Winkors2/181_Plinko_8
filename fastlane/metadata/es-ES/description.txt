@@ -1,0 +1,12 @@
+FollowTheBall es un juego ágil y agradable centrado en la atención y la reacción.
+
+Una pequeña bola negra cruza la pantalla a toda velocidad. Tu tarea es simple: tócalo para atraparlo. Cada toque preciso detiene la bola por un instante y suma un punto a tu marcador. Alcanza el objetivo y el nivel será tuyo.
+
+Los primeros niveles son tranquilos y acogedores. A medida que avanzas, el ritmo sube, el movimiento se anima y cada toque acertado se siente como una pequeña victoria. Las partidas cortas son perfectas para un momento libre, y el reto suave te invita a regresar una y otra vez.
+
+Lo que disfrutarás:
+- Visuales claros y relajantes con un fondo degradado suave
+- Un momento satisfactorio de quietud tras cada captura
+- Sensación de progreso: se desbloquean niveles, crecen los objetivos y mejoran los récords
+- Pantallas ligeras para estadísticas, logros y recompensas
+

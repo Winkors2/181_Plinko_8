@@ -1,0 +1,12 @@
+FollowTheBall, odak ve reaksiyona odaklanan hafif ve hızlı bir oyundur.
+
+Küçük siyah bir top ekranda hızla süzülür. Görevin basit: Yakalamak için dokun. Her isabetli dokunuş topu bir an durdurur ve skora 1 puan ekler. Hedefe ulaştığında seviye senindir.
+
+İlk seviyeler sakin ve davetkârdır. İlerledikçe tempo artar, hareket canlanır ve her başarılı dokunuş küçük bir zafer gibi hissettirir. Kısa turlar boş bir dakikaya idealdir; yumuşak zorluk ise sürekli “bir kez daha” demeye iter.
+
+Seveceklerin:
+- Yumuşak degrade arka planlı, sade ve rahatlatıcı görseller
+- Her yakalamanın ardından gelen tatmin edici durgunluk anı
+- İlerleme hissi: seviyeler açılır, hedefler büyür, en iyi skorlar gelişir
+- İstatistik, başarı ve ödül ekranları
+

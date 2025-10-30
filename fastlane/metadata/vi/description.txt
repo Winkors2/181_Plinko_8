@@ -1,0 +1,12 @@
+FollowTheBall là một trò chơi nhẹ nhàng, nhanh, tập trung vào sự chú ý và phản xạ.
+
+Một quả bóng đen nhỏ lướt nhanh trên màn hình. Nhiệm vụ của bạn rất đơn giản: chạm để bắt nó. Mỗi lần chạm chính xác sẽ khiến bóng dừng lại trong chốc lát và cộng thêm 1 điểm. Đạt mốc mục tiêu là bạn vượt qua màn chơi.
+
+Những màn đầu tiên yên ả và dễ làm quen. Càng về sau, nhịp độ tăng, chuyển động sinh động hơn và mỗi cú chạm thành công đều như một chiến thắng nhỏ. Ván chơi ngắn phù hợp cho vài phút rảnh rỗi, còn thử thách nhẹ nhàng lại khiến bạn muốn “thêm lần nữa”.
+
+Bạn sẽ thích:
+- Hình ảnh rõ ràng, thư giãn với nền chuyển sắc mượt mà
+- Khoảnh khắc tĩnh lặng đầy thỏa mãn sau mỗi lần bắt được bóng
+- Cảm giác tiến bộ: mở khóa màn chơi, mục tiêu tăng, kỷ lục được cải thiện
+- Màn hình gọn nhẹ cho thống kê, thành tựu và phần thưởng
+

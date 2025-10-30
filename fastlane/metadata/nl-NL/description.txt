@@ -1,0 +1,12 @@
+FollowTheBall is een vlot, prettig spel over focus en reactie.
+
+Een klein zwart balletje schiet over het scherm. Jouw taak is simpel: tik om het te vangen. Elke rake tik bevriest het balletje een fractie van een seconde en levert een punt op. Haal de doelscore en het level is gehaald.
+
+De eerste levels zijn rustig en uitnodigend. Naarmate je vordert, gaat het tempo omhoog, wordt de beweging levendiger, en voelt elke geslaagde tik als een kleine overwinning. Korte potjes zijn perfect voor een vrij moment, en de zachte uitdaging nodigt uit tot “nog één keertje”.
+
+Dit ga je waarderen:
+- Heldere, rustgevende visuals met een zachte verloopachtergrond
+- Een bevredigend moment van stilte na elke vangst
+- Gevoel van progressie: levels ontgrendelen, doelen groeien, highscores verbeteren
+- Luchtige schermen voor statistieken, prestaties en beloningen
+

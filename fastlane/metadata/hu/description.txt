@@ -1,0 +1,12 @@
+A FollowTheBall egy gyors, kellemes játék a fókuszról és reakcióról.
+
+Egy apró fekete labda cikázik a képernyőn. A feladatod egyszerű: érintéssel kapd el. Minden pontos érintés egy pillanatra megállítja a labdát, és egy ponttal növeli a pontszámod. Érd el a célt, és a szint a tiéd.
+
+Az első szintek nyugodtak és barátságosak. Ahogy haladsz, a tempó nő, a mozgás élettel telibb, és minden sikeres érintés apró győzelemnek érződik. A rövid menetek tökéletesek egy szabad percre, a lágy kihívás pedig újra és újra „még egy próbára” csábít.
+
+Amiket szeretni fogsz:
+- Tiszta, megnyugtató látvány, lágy színátmenetes háttérrel
+- Kielégítő nyugalmi pillanat minden elkapás után
+- A fejlődés érzése: szintek nyílnak, célok nőnek, rekordok javulnak
+- Könnyed statisztika-, teljesítmény- és jutalomképernyők
+

@@ -1,0 +1,12 @@
+FollowTheBall ialah permainan ringan dan pantas tentang fokus dan reaksi.
+
+Sebuah bola hitam kecil meluncur di skrin. Tugas anda ringkas: ketik untuk menangkapnya. Setiap ketikan tepat menghentikan bola seketika dan menambah satu mata ke skor. Capai sasaran dan tahap menjadi milik anda.
+
+Tahap awal tenang dan mesra. Semakin jauh, rentak meningkat, pergerakan lebih hidup, dan setiap ketikan berjaya terasa seperti kemenangan kecil. Pusingan pendek sesuai untuk masa terluang, manakala cabaran yang lembut membuatkan anda mahu “sekali lagi”.
+
+Anda akan suka:
+- Visual yang jelas dan menenangkan dengan latar bergradasi lembut
+- Detik hening yang memuaskan selepas setiap tangkapan
+- Rasa kemajuan: tahap terbuka, sasaran meningkat, rekod bertambah baik
+- Skrin ringan untuk statistik, pencapaian dan ganjaran
+
