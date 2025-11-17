@@ -20,7 +20,7 @@ class FirebaseManager {
     private let db = Firestore.firestore()
     
     func registerUser(completion: @escaping (Result<UserResponse, Error>) -> Void) {
-        let functionUrl = "https://europe-west1-apps-a354b.cloudfunctions.net/registerUser"
+        let functionUrl = "https://us-central1-apps-a354b.cloudfunctions.net/initSession"
         
         guard let url = URL(string: functionUrl) else {
             print("Url is not available")
