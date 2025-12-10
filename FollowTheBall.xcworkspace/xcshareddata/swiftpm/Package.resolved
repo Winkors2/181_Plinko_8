@@ -1,5 +1,5 @@
 {
-  "originHash" : "caabc144f14f172ac0e402a66aaba50e0a1dd0f1b766a306ddcc3ea3a90b203e",
+  "originHash" : "c32249523e658aa7e1bac77151a18e952dda9fb6e409449969ec913b7e57c6fc",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -116,15 +116,6 @@
       "state" : {
         "revision" : "540318ecedd63d883069ae7f1ed811a2df00b6ac",
         "version" : "2.4.0"
-      }
-    },
-    {
-      "identity" : "pushexpress-swift-sdk",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pushexpress/pushexpress-swift-sdk",
-      "state" : {
-        "branch" : "main",
-        "revision" : "5c5bb30553adb1f4aedbdeb840497bcceb0445da"
       }
     },
     {

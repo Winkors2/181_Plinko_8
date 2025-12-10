@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Combine
-import SdkPushExpress
+
 struct ContentViewApp: View {
     @StateObject private var viewModel = UserViewModel()
  
@@ -15,10 +15,17 @@ struct ContentViewApp: View {
     var body: some View {
         ZStack {
         if viewModel.status == nil {
-            Image("mtbg")
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    Color(red: 0.012, green: 0.027, blue: 0.169), // 030B57
+                    Color(red: 0.337, green: 0.678, blue: 0.875), // 56ADDF
+                    Color(red: 0.424, green: 0.714, blue: 0.875), // 6CB6DF
+                    Color(red: 0.012, green: 0.043, blue: 0.341)  // 030B57
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
             VStack(spacing: 20) {
                 ProgressView()
                     .scaleEffect(1.5)
@@ -28,25 +35,13 @@ struct ContentViewApp: View {
             
         } else if viewModel.status == true {
             ContentView().ignoresSafeArea()
-                .onAppear{
-                    do {
-                        try PushExpressManager.shared.deactivate()
-//                        print("❌ PushExpress деактивирован")
-                    } catch {
-                        print(" \(error)")
-                    }
-                }
+                
         } else if viewModel.status == false {
                 if let status = viewModel.status, status == false {
                     if let url = URL(string: viewModel.privacyPolicy ?? "") {
                         let model = WebLinkModel(homeURL: url)
                         let webViewModel = WebLinkViewModel(model: model)
                         WebLinkViewUI(vm: webViewModel)
-                            .onAppear {
-                                if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                                                  appDelegate.enablePushNotifications()
-                                              }
-                                                }
                     }
                 }
             
