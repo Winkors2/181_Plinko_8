@@ -24,7 +24,7 @@ struct MainMenuView: View {
                     
                     // App Title
                     VStack(spacing: 10) {
-                        Text("Follow The Ball")
+                        Text("Ball Drift Journey")
                             .font(.system(size: 36, weight: .bold, design: .rounded))
                             .foregroundColor(Color(red: 0.972, green: 0.992, blue: 1.0)) // F8FDFF
                         
