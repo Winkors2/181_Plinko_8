@@ -12,7 +12,7 @@ class UserViewModel: ObservableObject {
     func registerUser() {
         isLoading = true
         FirebaseManager.shared.registerUser { [weak self] result in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
                 self?.isLoading = false
                 switch result {
                 case .success(let response):
